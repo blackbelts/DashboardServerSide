@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ) {
         echo callMethods($input["uid"], $input["password"], $input["modalname"], $input["method"], $input["parmlist"], $input["mappinglist"]);
     } else {
-        echo json_encode(array("error" => "invaild"));
+        echo json_encode(array("error" => "invaild Post"));
     }
 } else {
     if (isset($_GET["password"]) && isset($_GET["username"])) {
@@ -71,13 +71,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 echo json_encode($countList);}
         } else {
-            echo json_encode(array("error" => "invaild"));
+            echo callMethods($_GET["uid"], $_GET["password"], $_GET["modalname"], $_GET["method"], $_GET["parmlist"], $_GET["mappinglist"]);
         }
 
     } else {
-        $inputJSON = file_get_contents('php://input');
-        $input = json_decode($inputJSON, true);
-        echo json_encode(callMethods($input["uid"], $input["password"], $input["modalname"], $input["method"], $input["parmlist"]));
+        echo json_encode(array("error" => "invaild"));
     }
 }
 /**
